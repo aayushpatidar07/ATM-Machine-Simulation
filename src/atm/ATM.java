@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class ATM {
     private static Scanner scanner = new Scanner(System.in);
     private static ATMService atmService;
-    private static final int MAX_PIN_ATTEMPTS = 3;
+    private static final int MAX_PIN_ATTEMPTS = ATMConstants.MAX_PIN_ATTEMPTS;
 
     public static void main(String[] args) {
         // Initialize default account
@@ -45,12 +45,12 @@ public class ATM {
      * Displays welcome screen with bank branding
      */
     private static void displayWelcomeScreen() {
-        System.out.println("===============================================");
+        ATMUtil.printLine();
         System.out.println("                                               ");
-        System.out.println("    WELCOME TO STATE BANK ATM SYSTEM          ");
-        System.out.println("          Serving India Since 1806             ");
+        System.out.println(Messages.MSG_WELCOME_TITLE);
+        System.out.println(Messages.MSG_WELCOME_TAGLINE);
         System.out.println("                                               ");
-        System.out.println("===============================================");
+        ATMUtil.printLine();
         System.out.println();
     }
 
@@ -61,25 +61,27 @@ public class ATM {
     private static boolean authenticateUser() {
         int attempts = MAX_PIN_ATTEMPTS;
         
-        System.out.println(">>> AUTHENTICATION REQUIRED <<<");
+        System.out.println(Messages.MSG_AUTH_REQUIRED);
         System.out.println();
         
         while (attempts > 0) {
-            System.out.print("Enter your 4-digit PIN: ");
+            System.out.print(Messages.MSG_ENTER_PIN);
             String pin = scanner.next();
             
             if (atmService.authenticate(pin)) {
-                System.out.println("\n[SUCCESS] PIN verified successfully!");
-                System.out.println("Welcome, " + atmService.getAccountHolderName() + "!");
-                System.out.println("Account Number: " + atmService.getMaskedAccountNumber());
+                System.out.println(Messages.MSG_PIN_SUCCESS);
+                System.out.println(String.format(Messages.MSG_WELCOME_USER, atmService.getAccountHolderName()));
+                System.out.println(String.format(Messages.MSG_ACCOUNT_NUMBER, atmService.getMaskedAccountNumber()));
                 System.out.println();
+                ATMLogger.logAuthentication("User", true);
                 return true;
             } else {
                 attempts--;
                 if (attempts > 0) {
-                    System.out.println("[X] Incorrect PIN! You have " + attempts + " attempt(s) remaining.");
+                    System.out.println(String.format(Messages.MSG_PIN_INCORRECT, attempts));
                     System.out.println();
                 }
+                ATMLogger.logAuthentication("User", false);
             }
         }
         
