@@ -122,4 +122,41 @@ public class Account {
         int fromIndex = Math.max(0, size - count);
         return new ArrayList<>(transactionHistory.subList(fromIndex, size));
     }
+
+    /**
+     * Transfers money to another account
+     * @param amount Amount to transfer
+     * @param targetAccountNumber Target account number
+     * @return true if transfer successful, false otherwise
+     */
+    public boolean transfer(double amount, String targetAccountNumber) {
+        if (amount <= this.balance) {
+            this.balance -= amount;
+            addTransaction("TRANSFER OUT to " + maskAccountNumber(targetAccountNumber), amount, this.balance);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Receives transferred money
+     * @param amount Amount to receive
+     * @param sourceAccountNumber Source account number
+     */
+    public void receiveTransfer(double amount, String sourceAccountNumber) {
+        this.balance += amount;
+        addTransaction("TRANSFER IN from " + maskAccountNumber(sourceAccountNumber), amount, this.balance);
+    }
+
+    /**
+     * Masks account number for display
+     * @param accountNum Account number to mask
+     * @return Masked account number
+     */
+    private String maskAccountNumber(String accountNum) {
+        if (accountNum == null || accountNum.length() < 4) {
+            return "XXXXX";
+        }
+        return "XXXXX" + accountNum.substring(accountNum.length() - 4);
+    }
 }
