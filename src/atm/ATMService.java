@@ -10,7 +10,7 @@ public class ATMService {
     private Account account;
 
     /**
-     * Constructor to initialize ATM service with an account
+     * Constructor to initialize ATM service with an accounts
      * @param account Account object
      */
     public ATMService(Account account) {
