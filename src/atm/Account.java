@@ -1,5 +1,10 @@
 package atm;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Account class represents a bank account with account holder details and balance
  * @author ATM Machine Simulation
@@ -10,6 +15,7 @@ public class Account {
     private String accountHolderName;
     private double balance;
     private String pin;
+    private List<String> transactionHistory;
 
     /**
      * Constructor to initialize account with default values
@@ -19,6 +25,7 @@ public class Account {
         this.accountHolderName = accountHolderName;
         this.balance = balance;
         this.pin = pin;
+        this.transactionHistory = new ArrayList<>();
     }
 
     // Getter methods
@@ -58,6 +65,7 @@ public class Account {
      */
     public void deposit(double amount) {
         this.balance += amount;
+        addTransaction("DEPOSIT", amount, this.balance);
     }
 
     /**
@@ -68,6 +76,7 @@ public class Account {
     public boolean withdraw(double amount) {
         if (amount <= this.balance) {
             this.balance -= amount;
+            addTransaction("WITHDRAWAL", amount, this.balance);
             return true;
         }
         return false;
@@ -79,5 +88,38 @@ public class Account {
      */
     public String getMaskedAccountNumber() {
         return "XXXXX" + accountNumber.substring(accountNumber.length() - 4);
+    }
+
+    /**
+     * Adds a transaction to history
+     * @param type Transaction type
+     * @param amount Transaction amount
+     * @param balanceAfter Balance after transaction
+     */
+    private void addTransaction(String type, double amount, double balanceAfter) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String timestamp = LocalDateTime.now().format(formatter);
+        String transaction = String.format("%s | ₹%.2f | Balance: ₹%.2f | %s", 
+                                         type, amount, balanceAfter, timestamp);
+        transactionHistory.add(transaction);
+    }
+
+    /**
+     * Returns transaction history
+     * @return List of transaction strings
+     */
+    public List<String> getTransactionHistory() {
+        return new ArrayList<>(transactionHistory);
+    }
+
+    /**
+     * Returns last N transactions
+     * @param count Number of transactions to return
+     * @return List of last N transactions
+     */
+    public List<String> getLastTransactions(int count) {
+        int size = transactionHistory.size();
+        int fromIndex = Math.max(0, size - count);
+        return new ArrayList<>(transactionHistory.subList(fromIndex, size));
     }
 }
