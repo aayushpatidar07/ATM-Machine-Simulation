@@ -74,4 +74,34 @@ public class ATMService {
     public String getMaskedAccountNumber() {
         return account.getMaskedAccountNumber();
     }
+
+    /**
+     * Returns mini statement (last N transactions)
+     * @param count Number of transactions to retrieve
+     * @return List of transaction strings
+     */
+    public java.util.List<String> getMiniStatement(int count) {
+        return account.getLastTransactions(count);
+    }
+
+    /**
+     * Returns full transaction history
+     * @return List of all transaction strings
+     */
+    public java.util.List<String> getTransactionHistory() {
+        return account.getTransactionHistory();
+    }
+
+    /**
+     * Transfers money to another account
+     * @param amount Amount to transfer
+     * @param targetAccountNumber Target account number
+     * @return true if transfer successful, false otherwise
+     */
+    public boolean transferMoney(double amount, String targetAccountNumber) {
+        if (amount <= 0) {
+            return false;
+        }
+        return account.transfer(amount, targetAccountNumber);
+    }
 }
