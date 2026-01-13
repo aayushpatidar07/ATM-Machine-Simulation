@@ -1,31 +1,53 @@
 # ATM Machine Simulation - Java Project
 
 ## Project Overview
-A comprehensive console-based ATM Machine Simulation built using Core Java. This project demonstrates Object-Oriented Programming principles, proper package structure, and clean code architecture.
+A comprehensive console-based ATM Machine Simulation built using Core Java. This project demonstrates Object-Oriented Programming principles, proper package structure, clean code architecture, and best practices in software design.
 
 ## Features
-- **Check Balance** - View current account balance
+- **PIN Authentication** - Secure 4-digit PIN system with attempt limiting
+- **Check Balance** - View current account balance with formatted output
 - **Deposit Money** - Add funds to account with validation
-- **Withdraw Money** - Withdraw funds with balance checks
-- **Transaction History** - View last 5 transactions
-- **PIN Authentication** - Secure 4-digit PIN system
-- **Exit** - Safely terminate the session
+- **Withdraw Money** - Withdraw funds with balance and minimum balance checks
+- **Money Transfer** - Transfer funds to other accounts
+- **Transaction History** - Complete transaction logging and tracking
+- **Mini Statement** - View recent transactions
+- **Receipt Generation** - Formatted transaction receipts
+- **Session Management** - Track user sessions and timeouts
+- **Statistics Tracking** - Monitor ATM usage metrics
+- **Comprehensive Logging** - All operations logged for audit trail
+- **Input Validation** - Robust validation for all user inputs
+- **Error Handling** - Custom exception handling for ATM operations
 
 ## Project Structure
 ```
 ATM Machine/
 ├── src/
-│   ├── com/
-│   │   └── atm/
-│   │       ├── main/
-│   │       │   └── ATMApplication.java    (Main entry point)
-│   │       ├── model/
-│   │       │   ├── Account.java           (Account data model)
-│   │       │   └── Transaction.java       (Transaction record)
-│   │       ├── service/
-│   │       │   └── ATMService.java        (Business logic)
-│   │       └── util/
-│   │           └── InputValidator.java    (Input validation)
+│   ├── atm/
+│   │   ├── Account.java              (Account model with transaction history)
+│   │   ├── ATM.java                  (Main ATM interface)
+│   │   ├── ATMService.java           (Business logic service layer)
+│   │   ├── ATMConstants.java         (System-wide constants)
+│   │   ├── ATMConfig.java            (Configuration management)
+│   │   ├── ATMException.java         (Custom exception handling)
+│   │   ├── ATMLogger.java            (Logging utility)
+│   │   ├── ATMStatistics.java        (Usage statistics tracker)
+│   │   ├── ATMUtil.java              (Helper utilities)
+│   │   ├── Messages.java             (User messages and notifications)
+│   │   ├── ReceiptGenerator.java     (Transaction receipt generation)
+│   │   ├── SessionManager.java       (Session lifecycle management)
+│   │   ├── TransactionType.java      (Transaction type enumeration)
+│   │   └── Validator.java            (Input validation)
+│   └── com/
+│       └── atm/
+│           ├── main/
+│           │   └── ATMApplication.java    (Alternative entry point)
+│           ├── model/
+│           │   ├── Account.java           (Account data model)
+│           │   └── Transaction.java       (Transaction record)
+│           ├── service/
+│           │   └── ATMService.java        (Business logic)
+│           └── util/
+│               └── InputValidator.java    (Input validation)
 ├── bin/                                    (Compiled classes)
 └── README.md                               (This file)
 ```
