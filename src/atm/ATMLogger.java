@@ -29,6 +29,7 @@ public class ATMLogger {
             String timestamp = LocalDateTime.now().format(formatter);
             String logEntry = String.format("[%s] [%s] %s", timestamp, level, message);
             pw.println(logEntry);
+            pw.flush(); // Ensure immediate write to disk
             
         } catch (IOException e) {
             System.err.println("Error writing to log file: " + e.getMessage());
