@@ -13,7 +13,8 @@ public class Messages {
     public static final String MSG_PIN_SUCCESS = "\n[SUCCESS] PIN verified successfully!";
     public static final String MSG_PIN_INCORRECT = "[X] Incorrect PIN! You have %d attempt(s) remaining.";
     public static final String MSG_CARD_BLOCKED = "\n[X] Maximum attempts exceeded! Card blocked for security.";
-    public static final String MSG_CONTACT_BANK = "Please contact your bank.";
+    public static final String MSG_CONTACT_BANK = "Please contact your bank immediately.";
+    public static final String MSG_INVALID_INPUT = "[X] Invalid input! Please try again.";
     
     // Welcome Messages
     public static final String MSG_WELCOME_HEADER = "===============================================";
