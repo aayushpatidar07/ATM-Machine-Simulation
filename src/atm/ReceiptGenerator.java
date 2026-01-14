@@ -13,6 +13,7 @@ public class ReceiptGenerator {
     
     private static final int RECEIPT_WIDTH = 40;
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+    private static final String RECEIPT_LINE = "=".repeat(RECEIPT_WIDTH);
     
     /**
      * Generates a transaction receipt
