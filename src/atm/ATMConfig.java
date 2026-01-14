@@ -20,14 +20,15 @@ public class ATMConfig {
     
     /**
      * Private constructor for singleton pattern
+     * Initializes default configuration values
      */
     private ATMConfig() {
-        // Default configuration
-        this.enableLogging = true;
-        this.printReceipts = true;
-        this.enableSoundEffects = false;
-        this.sessionTimeout = 300; // 5 minutes
-        this.language = "English";
+        // Default configuration values
+        this.enableLogging = true;        // Enable transaction logging
+        this.printReceipts = true;        // Auto-print receipts
+        this.enableSoundEffects = false;  // Disable sounds by default
+        this.sessionTimeout = 300;        // 5 minutes session timeout
+        this.language = "English";        // Default language
     }
     
     /**
