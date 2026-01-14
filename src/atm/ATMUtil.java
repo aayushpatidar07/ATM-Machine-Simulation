@@ -19,13 +19,14 @@ public class ATMUtil {
     /**
      * Masks account number for security
      * @param accountNumber Account number to mask
-     * @return Masked account number
+     * @return Masked account number showing only last 4 digits
      */
     public static String maskAccountNumber(String accountNumber) {
         if (accountNumber == null || accountNumber.length() < 4) {
             return "XXXXX";
         }
-        return "XXXXX" + accountNumber.substring(accountNumber.length() - 4);
+        int maskLength = accountNumber.length() - 4;
+        return "X".repeat(maskLength) + accountNumber.substring(accountNumber.length() - 4);
     }
     
     /**
