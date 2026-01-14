@@ -24,11 +24,15 @@ public class CurrencyFormatter {
     /**
      * Converts amount to words (Indian format)
      * @param amount Amount to convert
-     * @return Amount in words
+     * @return Amount in words with proper formatting
      */
     public static String toWords(double amount) {
         if (amount == 0) {
             return "Zero Rupees Only";
+        }
+        
+        if (amount < 0) {
+            return "Invalid Amount";
         }
         
         long rupees = (long) amount;
