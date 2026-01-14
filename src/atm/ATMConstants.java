@@ -32,6 +32,10 @@ public class ATMConstants {
     public static final int DEFAULT_MINI_STATEMENT_COUNT = 5;
     public static final int MAX_TRANSACTION_HISTORY = 100;
     
+    // Input Validation
+    public static final int MAX_INPUT_LENGTH = 50;
+    public static final int MAX_NAME_LENGTH = 100;
+    
     // Menu Options
     public static final int MENU_BALANCE = 1;
     public static final int MENU_DEPOSIT = 2;
