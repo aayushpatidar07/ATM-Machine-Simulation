@@ -13,7 +13,13 @@ public class Validator {
      * @return true if PIN is valid, false otherwise
      */
     public static boolean isValidPin(String pin) {
+        // Check for null or empty input
         if (pin == null || pin.isEmpty()) {
+            return false;
+        }
+        
+        // Check for whitespace
+        if (pin.trim().length() != pin.length()) {
             return false;
         }
         
