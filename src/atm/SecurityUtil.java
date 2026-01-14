@@ -10,6 +10,7 @@ public class SecurityUtil {
     
     private static final int MAX_DAILY_WITHDRAWAL_LIMIT = 50000;
     private static final int MAX_DAILY_TRANSFER_LIMIT = 100000;
+    private static final int SESSION_TIMEOUT_MINUTES = 5;
     
     /**
      * Validates PIN strength
