@@ -10,8 +10,9 @@ public class ATMService {
     private Account account;
 
     /**
-     * Constructor to initialize ATM service with an accounts
-     * @param account Account object
+     * Constructor to initialize ATM service with an account
+     * @param account Account object associated with this ATM session
+     * @throws IllegalArgumentException if account is null
      */
     public ATMService(Account account) {
         this.account = account;
