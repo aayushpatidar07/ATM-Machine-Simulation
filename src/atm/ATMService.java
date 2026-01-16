@@ -168,4 +168,22 @@ public class ATMService {
     public void setAccountFrozen(boolean freeze) {
         this.isAccountFrozen = freeze;
     }
+
+    /**
+     * Generates a transaction receipt
+     * @param transactionType Type of transaction
+     * @param amount Transaction amount
+     * @return Formatted receipt string
+     */
+    public String generateReceipt(String transactionType, double amount) {
+        StringBuilder receipt = new StringBuilder();
+        receipt.append("=== TRANSACTION RECEIPT ===\n");
+        receipt.append("Account: ").append(getMaskedAccountNumber()).append("\n");
+        receipt.append("Type: ").append(transactionType).append("\n");
+        receipt.append("Amount: ₹").append(String.format("%.2f", amount)).append("\n");
+        receipt.append("Balance: ₹").append(String.format("%.2f", checkBalance())).append("\n");
+        receipt.append("Date: ").append(java.time.LocalDateTime.now()).append("\n");
+        receipt.append("==========================");
+        return receipt.toString();
+    }
 }
