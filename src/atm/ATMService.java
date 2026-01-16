@@ -186,4 +186,17 @@ public class ATMService {
         receipt.append("==========================");
         return receipt.toString();
     }
+
+    /**
+     * Changes the account PIN
+     * @param oldPin Current PIN
+     * @param newPin New PIN to set
+     * @return true if PIN change successful, false otherwise
+     */
+    public boolean changePin(String oldPin, String newPin) {
+        if (authenticate(oldPin) && newPin != null && newPin.length() == 4) {
+            return account.updatePin(newPin);
+        }
+        return false;
+    }
 }
