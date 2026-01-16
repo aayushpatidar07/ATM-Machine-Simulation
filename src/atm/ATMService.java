@@ -8,6 +8,8 @@ package atm;
  */
 public class ATMService {
     private Account account;
+    private static final double DAILY_WITHDRAWAL_LIMIT = 50000.0;
+    private double dailyWithdrawnAmount = 0.0;
 
     /**
      * Constructor to initialize ATM service with an account
@@ -57,7 +59,14 @@ public class ATMService {
         if (amount <= 0) {
             return false;
         }
-        return account.withdraw(amount);
+        if (dailyWithdrawnAmount + amount > DAILY_WITHDRAWAL_LIMIT) {
+            return false; // Daily limit exceeded
+        }
+        boolean success = account.withdraw(amount);
+        if (success) {
+            dailyWithdrawnAmount += amount;
+        }
+        return success;
     }
 
     /**
