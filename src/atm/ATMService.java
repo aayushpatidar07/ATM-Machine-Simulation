@@ -10,6 +10,7 @@ public class ATMService {
     private Account account;
     private static final double DAILY_WITHDRAWAL_LIMIT = 50000.0;
     private double dailyWithdrawnAmount = 0.0;
+    private boolean isAccountFrozen = false;
 
     /**
      * Constructor to initialize ATM service with an account
@@ -150,5 +151,21 @@ public class ATMService {
             case "GBP": return amount / 105.0;
             default: return amount;
         }
+    }
+
+    /**
+     * Checks if the account is frozen
+     * @return true if account is frozen, false otherwise
+     */
+    public boolean isAccountFrozen() {
+        return isAccountFrozen;
+    }
+
+    /**
+     * Freezes or unfreezes the account
+     * @param freeze true to freeze, false to unfreeze
+     */
+    public void setAccountFrozen(boolean freeze) {
+        this.isAccountFrozen = freeze;
     }
 }
