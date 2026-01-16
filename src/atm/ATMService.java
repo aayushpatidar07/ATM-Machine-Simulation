@@ -13,6 +13,8 @@ public class ATMService {
     private boolean isAccountFrozen = false;
     private static final double OVERDRAFT_LIMIT = 5000.0;
     private java.util.List<String> transactionLog = new java.util.ArrayList<>();
+    private java.time.LocalDateTime sessionStartTime;
+    private static final int SESSION_TIMEOUT_MINUTES = 5;
 
     /**
      * Constructor to initialize ATM service with an account
@@ -21,6 +23,7 @@ public class ATMService {
      */
     public ATMService(Account account) {
         this.account = account;
+        this.sessionStartTime = java.time.LocalDateTime.now();
     }
 
     /**
@@ -230,5 +233,21 @@ public class ATMService {
      */
     public java.util.List<String> getTransactionLog() {
         return new java.util.ArrayList<>(transactionLog);
+    }
+
+    /**
+     * Checks if the session has timed out
+     * @return true if session has exceeded timeout limit, false otherwise
+     */
+    public boolean isSessionTimedOut() {
+        java.time.Duration duration = java.time.Duration.between(sessionStartTime, java.time.LocalDateTime.now());
+        return duration.toMinutes() >= SESSION_TIMEOUT_MINUTES;
+    }
+
+    /**
+     * Resets session timeout by updating start time
+     */
+    public void resetSessionTimeout() {
+        this.sessionStartTime = java.time.LocalDateTime.now();
     }
 }
