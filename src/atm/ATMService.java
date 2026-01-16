@@ -11,6 +11,7 @@ public class ATMService {
     private static final double DAILY_WITHDRAWAL_LIMIT = 50000.0;
     private double dailyWithdrawnAmount = 0.0;
     private boolean isAccountFrozen = false;
+    private static final double OVERDRAFT_LIMIT = 5000.0;
 
     /**
      * Constructor to initialize ATM service with an account
@@ -198,5 +199,15 @@ public class ATMService {
             return account.updatePin(newPin);
         }
         return false;
+    }
+
+    /**
+     * Checks if withdrawal would exceed overdraft limit
+     * @param amount Amount to withdraw
+     * @return true if within overdraft limit, false otherwise
+     */
+    public boolean isWithinOverdraftLimit(double amount) {
+        double balanceAfterWithdrawal = checkBalance() - amount;
+        return balanceAfterWithdrawal >= -OVERDRAFT_LIMIT;
     }
 }
