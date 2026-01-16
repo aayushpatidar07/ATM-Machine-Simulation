@@ -136,4 +136,19 @@ public class ATMService {
         }
         return 0.0; // No fee for other transactions
     }
+
+    /**
+     * Converts INR amount to foreign currency
+     * @param amount Amount in INR
+     * @param currency Target currency code (USD, EUR, GBP)
+     * @return Converted amount
+     */
+    public double convertCurrency(double amount, String currency) {
+        switch (currency) {
+            case "USD": return amount / 83.0;
+            case "EUR": return amount / 90.0;
+            case "GBP": return amount / 105.0;
+            default: return amount;
+        }
+    }
 }
