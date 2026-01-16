@@ -105,4 +105,13 @@ public class ATMService {
         }
         return account.transfer(amount, targetAccountNumber);
     }
+
+    /**
+     * Validates if the amount is within acceptable range
+     * @param amount Amount to validate
+     * @return true if amount is valid, false otherwise
+     */
+    private boolean isValidAmount(double amount) {
+        return amount > 0 && amount <= 100000;
+    }
 }
