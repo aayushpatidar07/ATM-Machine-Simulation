@@ -123,4 +123,17 @@ public class ATMService {
     private boolean isValidAmount(double amount) {
         return amount > 0 && amount <= 100000;
     }
+
+    /**
+     * Calculates transaction fee based on transaction type and amount
+     * @param amount Transaction amount
+     * @param transactionType Type of transaction (WITHDRAWAL, TRANSFER)
+     * @return Calculated fee amount
+     */
+    public double calculateTransactionFee(double amount, String transactionType) {
+        if (transactionType.equals("TRANSFER") && amount > 10000) {
+            return amount * 0.01; // 1% fee for large transfers
+        }
+        return 0.0; // No fee for other transactions
+    }
 }
