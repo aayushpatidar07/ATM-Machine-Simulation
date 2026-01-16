@@ -12,6 +12,7 @@ public class ATMService {
     private double dailyWithdrawnAmount = 0.0;
     private boolean isAccountFrozen = false;
     private static final double OVERDRAFT_LIMIT = 5000.0;
+    private java.util.List<String> transactionLog = new java.util.ArrayList<>();
 
     /**
      * Constructor to initialize ATM service with an account
@@ -209,5 +210,25 @@ public class ATMService {
     public boolean isWithinOverdraftLimit(double amount) {
         double balanceAfterWithdrawal = checkBalance() - amount;
         return balanceAfterWithdrawal >= -OVERDRAFT_LIMIT;
+    }
+
+    /**
+     * Logs a transaction with timestamp
+     * @param transactionType Type of transaction
+     * @param amount Transaction amount
+     * @param status Transaction status (SUCCESS/FAILED)
+     */
+    public void logTransaction(String transactionType, double amount, String status) {
+        String logEntry = String.format("[%s] %s: ₹%.2f - %s", 
+            java.time.LocalDateTime.now(), transactionType, amount, status);
+        transactionLog.add(logEntry);
+    }
+
+    /**
+     * Retrieves transaction log
+     * @return List of logged transactions
+     */
+    public java.util.List<String> getTransactionLog() {
+        return new java.util.ArrayList<>(transactionLog);
     }
 }
