@@ -15,6 +15,8 @@ public class ATMService {
     private java.util.List<String> transactionLog = new java.util.ArrayList<>();
     private java.time.LocalDateTime sessionStartTime;
     private static final int SESSION_TIMEOUT_MINUTES = 5;
+    private int failedLoginAttempts = 0;
+    private static final int MAX_FAILED_ATTEMPTS = 3;
 
     /**
      * Constructor to initialize ATM service with an account
@@ -32,7 +34,32 @@ public class ATMService {
      * @return true if authentication successful, false otherwise
      */
     public boolean authenticate(String pin) {
-        return account.validatePin(pin);
+        if (failedLoginAttempts >= MAX_FAILED_ATTEMPTS) {
+            isAccountFrozen = true;
+            return false;
+        }
+        boolean isValid = account.validatePin(pin);
+        if (isValid) {
+            failedLoginAttempts = 0;
+        } else {
+            failedLoginAttempts++;
+        }
+        return isValid;
+    }
+
+    /**
+     * Gets the number of failed login attempts
+     * @return Failed login attempts count
+     */
+    public int getFailedLoginAttempts() {
+        return failedLoginAttempts;
+    }
+
+    /**
+     * Resets failed login attempts counter
+     */
+    public void resetFailedLoginAttempts() {
+        this.failedLoginAttempts = 0;
     }
 
     /**
