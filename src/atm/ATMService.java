@@ -22,6 +22,7 @@ public class ATMService {
     private static final double MINIMUM_BALANCE_REQUIRED = 500.0;
     private String accountType = "SAVINGS"; // SAVINGS or CURRENT
     private String cardStatus = "ACTIVE"; // ACTIVE, BLOCKED, EXPIRED
+    private java.util.List<String> beneficiaryList = new java.util.ArrayList<>();
 
     /**
      * Constructor to initialize ATM service with an account
@@ -371,5 +372,35 @@ public class ATMService {
         if (status.equals("ACTIVE") || status.equals("BLOCKED") || status.equals("EXPIRED")) {
             this.cardStatus = status;
         }
+    }
+
+    /**
+     * Adds a beneficiary to the list
+     * @param beneficiaryAccountNumber Beneficiary account number
+     * @return true if added successfully, false if already exists
+     */
+    public boolean addBeneficiary(String beneficiaryAccountNumber) {
+        if (!beneficiaryList.contains(beneficiaryAccountNumber)) {
+            beneficiaryList.add(beneficiaryAccountNumber);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Removes a beneficiary from the list
+     * @param beneficiaryAccountNumber Beneficiary account number
+     * @return true if removed successfully, false if not found
+     */
+    public boolean removeBeneficiary(String beneficiaryAccountNumber) {
+        return beneficiaryList.remove(beneficiaryAccountNumber);
+    }
+
+    /**
+     * Gets list of all beneficiaries
+     * @return List of beneficiary account numbers
+     */
+    public java.util.List<String> getBeneficiaryList() {
+        return new java.util.ArrayList<>(beneficiaryList);
     }
 }
