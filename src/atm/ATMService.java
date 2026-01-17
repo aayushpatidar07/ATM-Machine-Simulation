@@ -25,6 +25,7 @@ public class ATMService {
     private java.util.List<String> beneficiaryList = new java.util.ArrayList<>();
     private boolean emailNotifications = true;
     private boolean smsNotifications = true;
+    private java.time.LocalDateTime lastActivityTime;
 
     /**
      * Constructor to initialize ATM service with an account
@@ -34,6 +35,7 @@ public class ATMService {
     public ATMService(Account account) {
         this.account = account;
         this.sessionStartTime = java.time.LocalDateTime.now();
+        this.lastActivityTime = java.time.LocalDateTime.now();
     }
 
     /**
@@ -470,5 +472,29 @@ public class ATMService {
      */
     public void setSmsNotifications(boolean enabled) {
         this.smsNotifications = enabled;
+    }
+
+    /**
+     * Updates last activity timestamp
+     */
+    public void updateLastActivity() {
+        this.lastActivityTime = java.time.LocalDateTime.now();
+    }
+
+    /**
+     * Gets last activity timestamp
+     * @return Last activity timestamp
+     */
+    public java.time.LocalDateTime getLastActivityTime() {
+        return lastActivityTime;
+    }
+
+    /**
+     * Gets time since last activity in minutes
+     * @return Minutes since last activity
+     */
+    public long getMinutesSinceLastActivity() {
+        java.time.Duration duration = java.time.Duration.between(lastActivityTime, java.time.LocalDateTime.now());
+        return duration.toMinutes();
     }
 }
