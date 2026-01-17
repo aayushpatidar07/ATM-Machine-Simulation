@@ -318,4 +318,31 @@ public class ATMService {
             this.accountType = accountType;
         }
     }
+
+    /**
+     * Calculates interest based on account type and balance
+     * @return Interest amount
+     */
+    public double calculateInterest() {
+        double balance = checkBalance();
+        if (accountType.equals("SAVINGS")) {
+            return balance * 0.04; // 4% annual interest for savings
+        } else if (accountType.equals("CURRENT")) {
+            return 0.0; // No interest for current account
+        }
+        return 0.0;
+    }
+
+    /**
+     * Applies calculated interest to account
+     * @return true if interest applied successfully
+     */
+    public boolean applyInterest() {
+        double interest = calculateInterest();
+        if (interest > 0) {
+            account.deposit(interest);
+            return true;
+        }
+        return false;
+    }
 }
