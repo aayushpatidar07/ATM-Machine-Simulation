@@ -403,4 +403,38 @@ public class ATMService {
     public java.util.List<String> getBeneficiaryList() {
         return new java.util.ArrayList<>(beneficiaryList);
     }
+
+    /**
+     * Calculates cash denomination for withdrawal
+     * @param amount Amount to withdraw
+     * @return Map of denomination to count
+     */
+    public java.util.Map<Integer, Integer> calculateDenomination(double amount) {
+        java.util.Map<Integer, Integer> denominations = new java.util.LinkedHashMap<>();
+        int[] notes = {2000, 500, 200, 100, 50, 20, 10};
+        int remainingAmount = (int) amount;
+        
+        for (int note : notes) {
+            if (remainingAmount >= note) {
+                int count = remainingAmount / note;
+                denominations.put(note, count);
+                remainingAmount %= note;
+            }
+        }
+        return denominations;
+    }
+
+    /**
+     * Displays denomination breakdown
+     * @param amount Amount to breakdown
+     * @return Formatted denomination string
+     */
+    public String getDenominationBreakdown(double amount) {
+        java.util.Map<Integer, Integer> denominations = calculateDenomination(amount);
+        StringBuilder breakdown = new StringBuilder("Denomination Breakdown:\n");
+        for (java.util.Map.Entry<Integer, Integer> entry : denominations.entrySet()) {
+            breakdown.append("₹").append(entry.getKey()).append(" x ").append(entry.getValue()).append("\n");
+        }
+        return breakdown.toString();
+    }
 }
