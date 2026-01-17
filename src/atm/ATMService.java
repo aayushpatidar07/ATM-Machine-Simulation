@@ -23,6 +23,8 @@ public class ATMService {
     private String accountType = "SAVINGS"; // SAVINGS or CURRENT
     private String cardStatus = "ACTIVE"; // ACTIVE, BLOCKED, EXPIRED
     private java.util.List<String> beneficiaryList = new java.util.ArrayList<>();
+    private boolean emailNotifications = true;
+    private boolean smsNotifications = true;
 
     /**
      * Constructor to initialize ATM service with an account
@@ -436,5 +438,37 @@ public class ATMService {
             breakdown.append("₹").append(entry.getKey()).append(" x ").append(entry.getValue()).append("\n");
         }
         return breakdown.toString();
+    }
+
+    /**
+     * Checks if email notifications are enabled
+     * @return true if enabled, false otherwise
+     */
+    public boolean isEmailNotificationsEnabled() {
+        return emailNotifications;
+    }
+
+    /**
+     * Sets email notification preference
+     * @param enabled true to enable, false to disable
+     */
+    public void setEmailNotifications(boolean enabled) {
+        this.emailNotifications = enabled;
+    }
+
+    /**
+     * Checks if SMS notifications are enabled
+     * @return true if enabled, false otherwise
+     */
+    public boolean isSmsNotificationsEnabled() {
+        return smsNotifications;
+    }
+
+    /**
+     * Sets SMS notification preference
+     * @param enabled true to enable, false to disable
+     */
+    public void setSmsNotifications(boolean enabled) {
+        this.smsNotifications = enabled;
     }
 }
