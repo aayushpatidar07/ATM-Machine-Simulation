@@ -17,6 +17,8 @@ public class ATMService {
     private static final int SESSION_TIMEOUT_MINUTES = 5;
     private int failedLoginAttempts = 0;
     private static final int MAX_FAILED_ATTEMPTS = 3;
+    private int dailyTransactionCount = 0;
+    private static final int MAX_DAILY_TRANSACTIONS = 20;
 
     /**
      * Constructor to initialize ATM service with an account
@@ -76,10 +78,11 @@ public class ATMService {
      * @return true if deposit successful, false if invalid amount
      */
     public boolean depositMoney(double amount) {
-        if (amount <= 0) {
+        if (amount <= 0 || dailyTransactionCount >= MAX_DAILY_TRANSACTIONS) {
             return false;
         }
         account.deposit(amount);
+        dailyTransactionCount++;
         return true;
     }
 
@@ -89,7 +92,7 @@ public class ATMService {
      * @return true if withdrawal successful, false if invalid amount or insufficient balance
      */
     public boolean withdrawMoney(double amount) {
-        if (amount <= 0) {
+        if (amount <= 0 || dailyTransactionCount >= MAX_DAILY_TRANSACTIONS) {
             return false;
         }
         if (dailyWithdrawnAmount + amount > DAILY_WITHDRAWAL_LIMIT) {
@@ -98,6 +101,7 @@ public class ATMService {
         boolean success = account.withdraw(amount);
         if (success) {
             dailyWithdrawnAmount += amount;
+            dailyTransactionCount++;
         }
         return success;
     }
