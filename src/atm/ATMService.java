@@ -21,6 +21,7 @@ public class ATMService {
     private static final int MAX_DAILY_TRANSACTIONS = 20;
     private static final double MINIMUM_BALANCE_REQUIRED = 500.0;
     private String accountType = "SAVINGS"; // SAVINGS or CURRENT
+    private String cardStatus = "ACTIVE"; // ACTIVE, BLOCKED, EXPIRED
 
     /**
      * Constructor to initialize ATM service with an account
@@ -344,5 +345,31 @@ public class ATMService {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Checks if card is active and can be used
+     * @return true if card is active, false otherwise
+     */
+    public boolean isCardActive() {
+        return cardStatus.equals("ACTIVE");
+    }
+
+    /**
+     * Gets current card status
+     * @return Card status (ACTIVE, BLOCKED, EXPIRED)
+     */
+    public String getCardStatus() {
+        return cardStatus;
+    }
+
+    /**
+     * Sets card status
+     * @param status New card status (ACTIVE, BLOCKED, EXPIRED)
+     */
+    public void setCardStatus(String status) {
+        if (status.equals("ACTIVE") || status.equals("BLOCKED") || status.equals("EXPIRED")) {
+            this.cardStatus = status;
+        }
     }
 }
