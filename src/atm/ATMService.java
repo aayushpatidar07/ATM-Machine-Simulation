@@ -19,6 +19,7 @@ public class ATMService {
     private static final int MAX_FAILED_ATTEMPTS = 3;
     private int dailyTransactionCount = 0;
     private static final int MAX_DAILY_TRANSACTIONS = 20;
+    private static final double MINIMUM_BALANCE_REQUIRED = 500.0;
 
     /**
      * Constructor to initialize ATM service with an account
@@ -280,5 +281,22 @@ public class ATMService {
      */
     public void resetSessionTimeout() {
         this.sessionStartTime = java.time.LocalDateTime.now();
+    }
+
+    /**
+     * Checks if account has minimum required balance
+     * @return true if balance meets minimum requirement, false otherwise
+     */
+    public boolean hasMinimumBalance() {
+        return checkBalance() >= MINIMUM_BALANCE_REQUIRED;
+    }
+
+    /**
+     * Validates withdrawal against minimum balance requirement
+     * @param amount Amount to withdraw
+     * @return true if withdrawal maintains minimum balance, false otherwise
+     */
+    public boolean canWithdrawWithMinBalance(double amount) {
+        return (checkBalance() - amount) >= MINIMUM_BALANCE_REQUIRED;
     }
 }
