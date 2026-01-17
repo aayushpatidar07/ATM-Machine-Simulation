@@ -20,6 +20,7 @@ public class ATMService {
     private int dailyTransactionCount = 0;
     private static final int MAX_DAILY_TRANSACTIONS = 20;
     private static final double MINIMUM_BALANCE_REQUIRED = 500.0;
+    private String accountType = "SAVINGS"; // SAVINGS or CURRENT
 
     /**
      * Constructor to initialize ATM service with an account
@@ -298,5 +299,23 @@ public class ATMService {
      */
     public boolean canWithdrawWithMinBalance(double amount) {
         return (checkBalance() - amount) >= MINIMUM_BALANCE_REQUIRED;
+    }
+
+    /**
+     * Gets the account type
+     * @return Account type (SAVINGS or CURRENT)
+     */
+    public String getAccountType() {
+        return accountType;
+    }
+
+    /**
+     * Sets the account type
+     * @param accountType Account type (SAVINGS or CURRENT)
+     */
+    public void setAccountType(String accountType) {
+        if (accountType.equals("SAVINGS") || accountType.equals("CURRENT")) {
+            this.accountType = accountType;
+        }
     }
 }
