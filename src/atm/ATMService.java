@@ -2,9 +2,12 @@ package atm;
 
 /**
  * ATMService class provides business logic for ATM operations
- * Handles deposit, withdrawal, and balance inquiry
- * @author ATM Machine Simulation
- * @version 1.0
+ * Handles deposit, withdrawal, balance inquiry, and fund transfers
+ * Implements secure transaction processing and session management
+ * 
+ * @author ATM Machine Simulation Team
+ * @version 2.0
+ * @since 2026-01-18
  */
 public class ATMService {
     private Account account;
