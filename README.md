@@ -82,13 +82,34 @@ compile_and_run.bat
 - **Initial Balance**: $5000.00
 
 ## Technologies Used
-- Java SE (Core Java)
-- Scanner for input handling
-- ArrayList for transaction history
-- Object-Oriented Programming concepts
+- **Java SE 17+** - Core Java
+- **Collections Framework** - ArrayList for transaction history
+- **Date/Time API** - Modern Java time handling
+- **Exception Handling** - Custom exception classes
+- **Object-Oriented Programming** - Encapsulation, Inheritance, Polymorphism
+- **Design Patterns** - Singleton, Factory patterns
+
+## Key Concepts Demonstrated
+- ✅ Clean Code Architecture
+- ✅ SOLID Principles
+- ✅ Proper Package Structure
+- ✅ Comprehensive Error Handling
+- ✅ Input Validation
+- ✅ Logging and Auditing
+- ✅ Session Management
+- ✅ Security Best Practices
 
 ## Author
 Created as an interview-ready Java project demonstrating clean code principles.
 
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contributing
+Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+
+## Security
+Please read [SECURITY.md](SECURITY.md) for information on reporting security vulnerabilities.
+
 ## Version
-1.0.0
+2.0.0
