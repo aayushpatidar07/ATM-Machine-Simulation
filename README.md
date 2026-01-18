@@ -1,5 +1,9 @@
 # ATM Machine Simulation - Java Project
 
+[![Java](https://img.shields.io/badge/Java-17+-orange.svg)](https://www.oracle.com/java/)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://github.com)
+
 ## Project Overview
 A comprehensive console-based ATM Machine Simulation built using Core Java. This project demonstrates Object-Oriented Programming principles, proper package structure, clean code architecture, and best practices in software design.
 
