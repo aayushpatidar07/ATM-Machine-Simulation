@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.1.0] - 2026-01-19
+
+### Added
+- Biometric authentication simulation in SecurityUtil
+- Device fingerprint validation for enhanced security
+- Suspicious activity detection based on transaction patterns
+- Account locking mechanism after failed login attempts
+- Two-factor authentication (2FA) with OTP generation
+- OTP validation method for secure transactions
+- Advanced security constants for threshold management
+
+### Security
+- Enhanced security measures with biometric support
+- Multi-factor authentication implementation
+- Device verification for fraud prevention
+- Automated account protection against brute force attacks
+
 ## [2.0.0] - 2026-01-18
 
 ### Added

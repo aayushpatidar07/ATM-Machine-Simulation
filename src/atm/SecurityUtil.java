@@ -11,6 +11,8 @@ public class SecurityUtil {
     private static final int MAX_DAILY_WITHDRAWAL_LIMIT = 50000;
     private static final int MAX_DAILY_TRANSFER_LIMIT = 100000;
     private static final int SESSION_TIMEOUT_MINUTES = 5;
+    private static final int MAX_LOGIN_ATTEMPTS = 3;
+    private static final int SUSPICIOUS_TRANSACTION_THRESHOLD = 5;
     
     /**
      * Validates PIN strength
@@ -112,6 +114,73 @@ public class SecurityUtil {
     public static String generateSessionToken() {
         return "TOKEN_" + System.currentTimeMillis() + "_" + 
                (int)(Math.random() * 10000);
+    }
+    
+    /**
+     * Simulates biometric authentication
+     * @param fingerprintData Fingerprint data
+     * @return true if authentication successful
+     */
+    public static boolean authenticateBiometric(String fingerprintData) {
+        // Placeholder for biometric authentication
+        // In production, integrate with actual biometric hardware/API
+        return fingerprintData != null && fingerprintData.length() > 0;
+    }
+    
+    /**
+     * Validates device fingerprint for security
+     * @param deviceId Device identifier
+     * @param registeredDevices List of registered device IDs
+     * @return true if device is recognized
+     */
+    public static boolean isRegisteredDevice(String deviceId, String[] registeredDevices) {
+        if (deviceId == null || registeredDevices == null) {
+            return false;
+        }
+        
+        for (String device : registeredDevices) {
+            if (deviceId.equals(device)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * Detects suspicious transaction patterns
+     * @param transactionCount Number of transactions in short period
+     * @return true if activity is suspicious
+     */
+    public static boolean isSuspiciousActivity(int transactionCount) {
+        return transactionCount > SUSPICIOUS_TRANSACTION_THRESHOLD;
+    }
+    
+    /**
+     * Validates account lock status based on failed attempts
+     * @param failedAttempts Number of failed login attempts
+     * @return true if account should be locked
+     */
+    public static boolean shouldLockAccount(int failedAttempts) {
+        return failedAttempts >= MAX_LOGIN_ATTEMPTS;
+    }
+    
+    /**
+     * Generates one-time password (OTP) for two-factor authentication
+     * @return 6-digit OTP
+     */
+    public static String generateOTP() {
+        int otp = (int)(Math.random() * 900000) + 100000;
+        return String.valueOf(otp);
+    }
+    
+    /**
+     * Validates OTP entered by user
+     * @param enteredOTP OTP entered by user
+     * @param generatedOTP OTP that was generated
+     * @return true if OTP matches
+     */
+    public static boolean validateOTP(String enteredOTP, String generatedOTP) {
+        return enteredOTP != null && enteredOTP.equals(generatedOTP);
     }
     
     /**
