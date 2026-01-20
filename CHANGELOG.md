@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.2.0] - 2026-01-20
+
+### Added
+- New utility methods in DateTimeUtil class
+- getCurrentTimestamp() for millisecond timestamps
+- parseDate() for date string parsing with error handling
+- isWeekend() to check if a date is on weekend
+- getDaysBetween() to calculate days between dates
+- generateTransactionId() in ATMUtil for unique transaction IDs
+- Session timeout constants for better session management
+
+### Improved
+- Documentation across all utility classes
+- Version bumps for updated classes
+- Code organization and import statements
+
 ## [2.1.0] - 2026-01-19
 
 ### Added
