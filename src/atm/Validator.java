@@ -2,8 +2,9 @@ package atm;
 
 /**
  * Validator class for input validation in ATM operations
+ * Provides comprehensive validation for PINs, amounts, and account numbers
  * @author ATM Machine Simulation
- * @version 1.0
+ * @version 1.1
  */
 public class Validator {
     
