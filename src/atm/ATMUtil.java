@@ -3,7 +3,7 @@ package atm;
 /**
  * Utility class providing helper methods for ATM operations
  * @author ATM Machine Simulation
- * @version 1.0
+ * @version 1.1
  */
 public class ATMUtil {
     
