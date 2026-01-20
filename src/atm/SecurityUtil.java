@@ -3,8 +3,9 @@ package atm;
 /**
  * Security utilities for ATM operations
  * Handles security-related validations and checks
+ * Provides PIN strength validation and fraud detection
  * @author ATM Machine Simulation
- * @version 1.0
+ * @version 1.2
  */
 public class SecurityUtil {
     
