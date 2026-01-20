@@ -105,6 +105,16 @@ public class ATMUtil {
     }
     
     /**
+     * Generates a random transaction ID
+     * @return Random transaction ID
+     */
+    public static String generateTransactionId() {
+        long timestamp = System.currentTimeMillis();
+        int random = (int) (Math.random() * 9000) + 1000;
+        return "TXN" + timestamp + random;
+    }
+    
+    /**
      * Private constructor to prevent instantiation
      */
     private ATMUtil() {
