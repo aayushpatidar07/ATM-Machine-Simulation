@@ -1,7 +1,10 @@
 package atm;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Date/Time utility class for ATM operations
@@ -31,7 +34,7 @@ public class DateTimeUtil {
      * @return Formatted time string
      */
     public static String getCurrentTime() {
-        return java.time.LocalTime.now().format(TIME_FORMATTER);
+        return LocalTime.now().format(TIME_FORMATTER);
     }
     
     /**
@@ -39,7 +42,7 @@ public class DateTimeUtil {
      * @return Formatted datetime string
      */
     public static String getCurrentDateTime() {
-        return java.time.LocalDateTime.now().format(DATETIME_FORMATTER);
+        return LocalDateTime.now().format(DATETIME_FORMATTER);
     }
     
     /**
@@ -47,7 +50,7 @@ public class DateTimeUtil {
      * @return true if within business hours (9 AM - 9 PM)
      */
     public static boolean isBusinessHours() {
-        int hour = java.time.LocalTime.now().getHour();
+        int hour = LocalTime.now().getHour();
         return hour >= 9 && hour < 21;
     }
     
@@ -56,9 +59,9 @@ public class DateTimeUtil {
      * @return true if Monday-Friday
      */
     public static boolean isWeekday() {
-        java.time.DayOfWeek day = LocalDate.now().getDayOfWeek();
-        return day != java.time.DayOfWeek.SATURDAY && 
-               day != java.time.DayOfWeek.SUNDAY;
+        LocalDate today = LocalDate.now();
+        int dayOfWeek = today.getDayOfWeek().getValue();
+        return dayOfWeek >= 1 && dayOfWeek <= 5;
     }
     
     /**
@@ -97,6 +100,47 @@ public class DateTimeUtil {
         } else {
             return String.format("%ds", seconds);
         }
+    }
+    
+    /**
+     * Gets current timestamp in milliseconds
+     * @return Current timestamp
+     */
+    public static long getCurrentTimestamp() {
+        return System.currentTimeMillis();
+    }
+    
+    /**
+     * Parses date string to LocalDate
+     * @param dateString Date string in dd-MM-yyyy format
+     * @return LocalDate object or null if parsing fails
+     */
+    public static LocalDate parseDate(String dateString) {
+        try {
+            return LocalDate.parse(dateString, DATE_FORMATTER);
+        } catch (DateTimeParseException e) {
+            return null;
+        }
+    }
+    
+    /**
+     * Checks if a given date is a weekend
+     * @param date Date to check
+     * @return true if Saturday or Sunday
+     */
+    public static boolean isWeekend(LocalDate date) {
+        int dayOfWeek = date.getDayOfWeek().getValue();
+        return dayOfWeek == 6 || dayOfWeek == 7;
+    }
+    
+    /**
+     * Gets the number of days between two dates
+     * @param startDate Start date
+     * @param endDate End date
+     * @return Number of days between dates
+     */
+    public static long getDaysBetween(LocalDate startDate, LocalDate endDate) {
+        return java.time.temporal.ChronoUnit.DAYS.between(startDate, endDate);
     }
     
     /**
