@@ -101,6 +101,38 @@ public class Validator {
     }
     
     /**
+     * Validates email format
+     * @param email Email address to validate
+     * @return true if email is valid, false otherwise
+     */
+    public static boolean isValidEmail(String email) {
+        if (email == null || email.isEmpty()) {
+            return false;
+        }
+        
+        // Basic email validation regex
+        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+        return email.matches(emailRegex);
+    }
+    
+    /**
+     * Validates phone number format (10 digits)
+     * @param phoneNumber Phone number to validate
+     * @return true if phone number is valid, false otherwise
+     */
+    public static boolean isValidPhoneNumber(String phoneNumber) {
+        if (phoneNumber == null || phoneNumber.isEmpty()) {
+            return false;
+        }
+        
+        // Remove any non-digit characters
+        String cleanedNumber = phoneNumber.replaceAll("[^0-9]", "");
+        
+        // Check if it's exactly 10 digits
+        return cleanedNumber.length() == 10;
+    }
+    
+    /**
      * Private constructor to prevent instantiation
      */
     private Validator() {
