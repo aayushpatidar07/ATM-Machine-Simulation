@@ -2,8 +2,9 @@ package atm;
 
 /**
  * Error messages and user notifications for ATM operations
+ * Centralized message management for consistency
  * @author ATM Machine Simulation
- * @version 1.0
+ * @version 1.1
  */
 public class Messages {
     

@@ -500,4 +500,41 @@ public class ATMService {
         java.time.Duration duration = java.time.Duration.between(lastActivityTime, java.time.LocalDateTime.now());
         return duration.toMinutes();
     }
+    
+    /**
+     * Gets recent transaction history with limit
+     * @param limit Maximum number of recent transactions to retrieve
+     * @return List of recent transactions
+     */
+    public java.util.List<String> getRecentTransactionHistory(int limit) {
+        java.util.List<String> history = getTransactionLog();
+        if (limit <= 0 || limit >= history.size()) {
+            return history;
+        }
+        // Return the last 'limit' transactions
+        return history.subList(history.size() - limit, history.size());
+    }
+    
+    /**
+     * Clears all transaction logs (admin function)
+     */
+    public void clearTransactionLog() {
+        this.transactionLog.clear();
+    }
+    
+    /**
+     * Gets count of transactions today
+     * @return Number of transactions performed today
+     */
+    public int getDailyTransactionCount() {
+        return dailyTransactionCount;
+    }
+    
+    /**
+     * Gets remaining daily withdrawal limit
+     * @return Remaining amount that can be withdrawn today
+     */
+    public double getRemainingDailyWithdrawalLimit() {
+        return DAILY_WITHDRAWAL_LIMIT - dailyWithdrawnAmount;
+    }
 }

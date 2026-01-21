@@ -32,6 +32,10 @@ public class ATMConstants {
     public static final int DEFAULT_MINI_STATEMENT_COUNT = 5;
     public static final int MAX_TRANSACTION_HISTORY = 100;
     
+    // Session Configuration
+    public static final int SESSION_TIMEOUT_MINUTES = 5;
+    public static final int INACTIVITY_WARNING_SECONDS = 30;
+    
     // Input Validation
     public static final int MAX_INPUT_LENGTH = 50;
     public static final int MAX_NAME_LENGTH = 100;

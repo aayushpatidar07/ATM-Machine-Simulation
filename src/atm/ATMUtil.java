@@ -3,7 +3,7 @@ package atm;
 /**
  * Utility class providing helper methods for ATM operations
  * @author ATM Machine Simulation
- * @version 1.0
+ * @version 1.1
  */
 public class ATMUtil {
     
@@ -102,6 +102,16 @@ public class ATMUtil {
         }
         
         return result.toString().trim();
+    }
+    
+    /**
+     * Generates a random transaction ID
+     * @return Random transaction ID
+     */
+    public static String generateTransactionId() {
+        long timestamp = System.currentTimeMillis();
+        int random = (int) (Math.random() * 9000) + 1000;
+        return "TXN" + timestamp + random;
     }
     
     /**
