@@ -185,6 +185,37 @@ public class SecurityUtil {
     }
     
     /**
+     * Detects unusual transaction amount
+     * @param amount Transaction amount
+     * @param averageAmount User's average transaction amount
+     * @return true if amount is unusually high
+     */
+    public static boolean isUnusualTransactionAmount(double amount, double averageAmount) {
+        // Flag if transaction is 5x the average or more
+        return amount >= (averageAmount * 5) && averageAmount > 0;
+    }
+    
+    /**
+     * Validates transaction timing for fraud detection
+     * @param hour Hour of day (0-23)
+     * @return true if transaction timing is unusual (late night/early morning)
+     */
+    public static boolean isUnusualTransactionTime(int hour) {
+        // Transactions between 2 AM and 5 AM are considered unusual
+        return hour >= 2 && hour < 5;
+    }
+    
+    /**
+     * Checks if multiple rapid transactions indicate fraud
+     * @param transactionIntervalSeconds Seconds between transactions
+     * @return true if transactions are too rapid
+     */
+    public static boolean isRapidTransaction(long transactionIntervalSeconds) {
+        // Flag if transactions are less than 10 seconds apart
+        return transactionIntervalSeconds < 10;
+    }
+    
+    /**
      * Private constructor to prevent instantiation
      */
     private SecurityUtil() {
