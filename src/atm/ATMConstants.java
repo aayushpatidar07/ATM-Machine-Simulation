@@ -48,6 +48,14 @@ public class ATMConstants {
     public static final int MENU_MINI_STATEMENT = 5;
     public static final int MENU_TRANSFER = 6;
     
+    // Service Charges
+    public static final double ATM_TRANSACTION_CHARGE = 0.0;
+    public static final double INTER_BANK_TRANSFER_CHARGE = 5.0;
+    
+    // Security
+    public static final int PASSWORD_EXPIRY_DAYS = 90;
+    public static final boolean ENABLE_BIOMETRIC = false;
+    
     /**
      * Private constructor to prevent instantiation
      */

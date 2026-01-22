@@ -13,6 +13,10 @@ public class ATM {
     private static ATMService atmService;
     private static final int MAX_PIN_ATTEMPTS = ATMConstants.MAX_PIN_ATTEMPTS;
 
+    /**
+     * Main entry point for ATM application
+     * @param args Command line arguments (not used)
+     */
     public static void main(String[] args) {
         // Initialize default account
         Account account = new Account(
@@ -36,9 +40,12 @@ public class ATM {
         }
 
         // Main ATM menu loop
-        runATM();
-        
-        scanner.close();
+        try {
+            runATM();
+        } finally {
+            scanner.close();
+            System.out.println("\nThank you for using our ATM service!");
+        }
     }
 
     /**

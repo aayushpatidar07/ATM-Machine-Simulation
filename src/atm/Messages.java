@@ -48,6 +48,14 @@ public class Messages {
     public static final String MSG_MENU_MINI_STATEMENT = "4. Mini Statement";
     public static final String MSG_MENU_TRANSFER = "5. Transfer Money";
     public static final String MSG_MENU_EXIT = "6. Exit";
+    
+    // Session Messages
+    public static final String MSG_SESSION_TIMEOUT = "[X] Session timed out due to inactivity.";
+    public static final String MSG_SESSION_ACTIVE = "Session active. Last activity: %s";
+    
+    // Additional Messages
+    public static final String MSG_THANK_YOU = "Thank you for using our ATM service!";
+    public static final String MSG_HAVE_NICE_DAY = "Have a nice day!";
     public static final String MSG_MENU_CHOICE = "Enter your choice (1-6): ";
     public static final String MSG_INVALID_CHOICE = "[X] Invalid choice! Please select a valid option.";
     

@@ -45,6 +45,35 @@ public class ATMUtil {
     }
     
     /**
+     * Sanitizes user input by trimming whitespace
+     * @param input Input string
+     * @return Sanitized string
+     */
+    public static String sanitizeInput(String input) {
+        if (input == null) {
+            return "";
+        }
+        return input.trim();
+    }
+    
+    /**
+     * Validates if string is numeric
+     * @param str String to validate
+     * @return true if numeric, false otherwise
+     */
+    public static boolean isNumeric(String str) {
+        if (str == null || str.isEmpty()) {
+            return false;
+        }
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+    
+    /**
      * Clears console (simulated)
      */
     public static void clearScreen() {

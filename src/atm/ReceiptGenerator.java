@@ -7,13 +7,15 @@ import java.time.format.DateTimeFormatter;
  * Receipt generator for ATM transactions
  * Generates formatted receipts for various transaction types
  * @author ATM Machine Simulation
- * @version 1.0
+ * @version 2.0
+ * @since 2026-01-22
  */
 public class ReceiptGenerator {
     
     private static final int RECEIPT_WIDTH = 40;
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
     private static final String RECEIPT_LINE = "=".repeat(RECEIPT_WIDTH);
+    private static int receiptCounter = 1000;
     
     /**
      * Generates a transaction receipt
@@ -27,6 +29,7 @@ public class ReceiptGenerator {
     public static String generateReceipt(String accountNumber, String accountHolder, 
                                         String transactionType, double amount, double balance) {
         StringBuilder receipt = new StringBuilder();
+        String receiptNumber = generateReceiptNumber();
         
         receipt.append("\n");
         printReceiptLine(receipt);
@@ -35,6 +38,7 @@ public class ReceiptGenerator {
         centerText(receipt, "TRANSACTION RECEIPT");
         printReceiptLine(receipt);
         
+        receipt.append(String.format("Receipt #: %s\n", receiptNumber));
         receipt.append(String.format("Date/Time: %s\n", LocalDateTime.now().format(formatter)));
         receipt.append(String.format("Account: %s\n", maskAccount(accountNumber)));
         receipt.append(String.format("Name: %s\n", accountHolder));
@@ -46,6 +50,7 @@ public class ReceiptGenerator {
         printReceiptLine(receipt);
         
         centerText(receipt, "Thank You!");
+        centerText(receipt, "Please keep this receipt");
         printReceiptLine(receipt);
         
         return receipt.toString();
@@ -109,6 +114,14 @@ public class ReceiptGenerator {
      */
     private static String maskAccount(String accountNumber) {
         return ATMUtil.maskAccountNumber(accountNumber);
+    }
+    
+    /**
+     * Generates a unique receipt number
+     * @return Receipt number in format RCP-XXXX
+     */
+    private static String generateReceiptNumber() {
+        return String.format("RCP-%04d", receiptCounter++);
     }
     
     /**
