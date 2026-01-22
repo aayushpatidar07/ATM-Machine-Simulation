@@ -19,8 +19,26 @@ public class Account {
 
     /**
      * Constructor to initialize account with default values
+     * @param accountNumber The account number
+     * @param accountHolderName Name of the account holder
+     * @param balance Initial balance
+     * @param pin 4-digit PIN for authentication
+     * @throws IllegalArgumentException if any parameter is invalid
      */
     public Account(String accountNumber, String accountHolderName, double balance, String pin) {
+        if (accountNumber == null || accountNumber.isEmpty()) {
+            throw new IllegalArgumentException("Account number cannot be null or empty");
+        }
+        if (accountHolderName == null || accountHolderName.isEmpty()) {
+            throw new IllegalArgumentException("Account holder name cannot be null or empty");
+        }
+        if (balance < 0) {
+            throw new IllegalArgumentException("Balance cannot be negative");
+        }
+        if (pin == null || pin.length() != 4) {
+            throw new IllegalArgumentException("PIN must be 4 digits");
+        }
+        
         this.accountNumber = accountNumber;
         this.accountHolderName = accountHolderName;
         this.balance = balance;

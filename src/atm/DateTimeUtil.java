@@ -81,6 +81,24 @@ public class DateTimeUtil {
     }
     
     /**
+     * Checks if it's weekend
+     * @return true if Saturday or Sunday
+     */
+    public static boolean isWeekend() {
+        LocalDate today = LocalDate.now();
+        int dayOfWeek = today.getDayOfWeek().getValue();
+        return dayOfWeek >= 6;
+    }
+    
+    /**
+     * Gets year
+     * @return Current year
+     */
+    public static int getCurrentYear() {
+        return LocalDate.now().getYear();
+    }
+    
+    /**
      * Formats milliseconds to readable duration
      * @param millis Milliseconds
      * @return Formatted duration string

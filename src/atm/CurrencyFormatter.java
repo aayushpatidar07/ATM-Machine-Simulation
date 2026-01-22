@@ -23,6 +23,36 @@ public class CurrencyFormatter {
     };
     
     /**
+     * Formats amount with Indian comma notation
+     * @param amount Amount to format
+     * @return Formatted string (e.g., 1,50,000.00)
+     */
+    public static String formatIndianCurrency(double amount) {
+        String amountStr = String.format("%.2f", amount);
+        String[] parts = amountStr.split("\\.");
+        String integerPart = parts[0];
+        String decimalPart = parts.length > 1 ? parts[1] : "00";
+        
+        StringBuilder formatted = new StringBuilder();
+        int len = integerPart.length();
+        
+        if (len > 3) {
+            formatted.insert(0, integerPart.substring(len - 3));
+            int remaining = len - 3;
+            
+            while (remaining > 0) {
+                int start = Math.max(0, remaining - 2);
+                formatted.insert(0, "," + integerPart.substring(start, remaining));
+                remaining = start;
+            }
+        } else {
+            formatted.append(integerPart);
+        }
+        
+        return ATMConstants.CURRENCY_SYMBOL + formatted + "." + decimalPart;
+    }
+    
+    /**
      * Converts amount to words (Indian format)
      * @param amount Amount to convert
      * @return Amount in words with proper formatting

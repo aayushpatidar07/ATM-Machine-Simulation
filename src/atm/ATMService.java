@@ -36,9 +36,13 @@ public class ATMService {
      * @throws IllegalArgumentException if account is null
      */
     public ATMService(Account account) {
+        if (account == null) {
+            throw new IllegalArgumentException("Account cannot be null");
+        }
         this.account = account;
         this.sessionStartTime = java.time.LocalDateTime.now();
         this.lastActivityTime = java.time.LocalDateTime.now();
+        logTransaction("Session started for account: " + account.getAccountNumber());
     }
 
     /**

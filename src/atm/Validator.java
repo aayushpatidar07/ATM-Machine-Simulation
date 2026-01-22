@@ -44,6 +44,33 @@ public class Validator {
     }
     
     /**
+     * Validates email format
+     * @param email Email to validate
+     * @return true if email is valid, false otherwise
+     */
+    public static boolean isValidEmail(String email) {
+        if (email == null || email.isEmpty()) {
+            return false;
+        }
+        // Simple email regex pattern
+        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+        return email.matches(emailRegex);
+    }
+    
+    /**
+     * Validates phone number (Indian format)
+     * @param phone Phone number to validate
+     * @return true if phone is valid, false otherwise
+     */
+    public static boolean isValidPhoneNumber(String phone) {
+        if (phone == null || phone.isEmpty()) {
+            return false;
+        }
+        // Indian phone number: 10 digits
+        return phone.matches("^[6-9]\\d{9}$");
+    }
+    
+    /**
      * Validates withdrawal amount
      * @param amount Amount to validate
      * @return true if amount is valid, false otherwise
