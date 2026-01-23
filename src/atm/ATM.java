@@ -54,8 +54,8 @@ public class ATM {
     private static void displayWelcomeScreen() {
         ATMUtil.printLine();
         System.out.println("                                               ");
-        System.out.println(Messages.MSG_WELCOME_TITLE);
-        System.out.println(Messages.MSG_WELCOME_TAGLINE);
+        System.out.println(LanguageManager.getWelcomeTitle());
+        System.out.println(LanguageManager.getWelcomeTagline());
         System.out.println("                                               ");
         ATMUtil.printLine();
         System.out.println();
@@ -104,7 +104,7 @@ public class ATM {
         while (!exit) {
             displayMenu();
             
-            System.out.print("Enter your choice (1-4): ");
+            System.out.print(LanguageManager.getEnterChoice());
             int choice = scanner.nextInt();
             System.out.println();
 
@@ -120,11 +120,20 @@ public class ATM {
                     withdrawMoney();
                     break;
                 case 4:
+                    changePin();
+                    break;
+                case 5:
+                    exportStatement();
+                    break;
+                case 6:
+                    changeLanguage();
+                    break;
+                case 7:
                     exit = true;
                     exitATM();
                     break;
                 default:
-                    System.out.println("[X] Invalid choice! Please select option 1-4.");
+                    System.out.println(LanguageManager.getInvalidChoice());
                     System.out.println();
             }
         }
@@ -135,12 +144,15 @@ public class ATM {
      */
     private static void displayMenu() {
         System.out.println("===============================================");
-        System.out.println("              ATM MAIN MENU                    ");
+        System.out.println(LanguageManager.getMainMenuTitle());
         System.out.println("===============================================");
-        System.out.println("  1. Check Balance");
-        System.out.println("  2. Deposit Money");
-        System.out.println("  3. Withdraw Money");
-        System.out.println("  4. Exit");
+        System.out.println(LanguageManager.getMenuCheckBalance());
+        System.out.println(LanguageManager.getMenuDeposit());
+        System.out.println(LanguageManager.getMenuWithdraw());
+        System.out.println(LanguageManager.getMenuChangePin());
+        System.out.println(LanguageManager.getMenuExportStatement());
+        System.out.println(LanguageManager.getMenuChangeLanguage());
+        System.out.println(LanguageManager.getMenuExit());
         System.out.println("===============================================");
     }
 
@@ -207,14 +219,115 @@ public class ATM {
     }
 
     /**
+     * Handles change PIN operation
+     * Validates old PIN and sets new PIN
+     */
+    private static void changePin() {
+        System.out.println("===============================================");
+        System.out.println("           CHANGE PIN                          ");
+        System.out.println("===============================================");
+        System.out.print("  Enter current PIN: ");
+        String oldPin = scanner.next();
+        System.out.print("  Enter new PIN (4 digits): ");
+        String newPin = scanner.next();
+        System.out.print("  Confirm new PIN: ");
+        String confirmPin = scanner.next();
+
+        if (!newPin.equals(confirmPin)) {
+            System.out.println("\n  [X] PINs do not match! Please try again.");
+        } else if (atmService.changePin(oldPin, newPin)) {
+            System.out.println("\n  [SUCCESS] PIN changed successfully!");
+            System.out.println("  Please remember your new PIN.");
+        } else {
+            System.out.println("\n  [X] PIN change failed!");
+            System.out.println("  Reason: Invalid old PIN or new PIN format.");
+            System.out.println("  Note: New PIN must be 4 digits and different from old PIN.");
+        }
+        System.out.println("===============================================");
+        System.out.println();
+    }Handles account statement export operation
+     * Allows user to choose format and export transaction history
+     */
+    private static void exportStatement() {
+        System.out.println("===============================================");
+        System.out.println("           EXPORT STATEMENT                    ");
+        System.out.println("===============================================");
+        System.out.println("  Select Export Format:");
+        System.out.println("  1. CSV (Comma Separated Values)");
+        System.out.println("  2. TXT (Plain Text)");
+        System.out.println("  3. HTML (Web Page)");
+        System.out.println("  4. Cancel");
+        System.out.print("\n  Enter your choice (1-4): ");
+        
+        int formatChoice = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+        
+        if (formatChoice == 4) {
+            System.out.println("\n  Export cancelled.");
+            System.out.println("===============================================");
+            System.out.println();
+            return;
+        }
+        
+        System.out.print("  Enter output path (or press Enter for current directory): ");
+        String outputPath = scanner.nextLine();
+        if (outputPath.trim().isEmpty()) {
+            outputPath = ".";
+        }
+        
+        boolean success = false;
+        java.util.List<String> transactions = atmService.getTransactionHistory();
+        
+        switch (formatChoice) {
+            case 1:
+                success = StatementExporter.exportToCSV(
+                    atmService.getMaskedAccountNumber(),
+                    atmService.getAccountHolderName(),
+                    transactions,
+                    outputPath
+                );
+                break;
+            case 2:
+                success = StatementExporter.exportToTXT(
+                    atmService.getMaskedAccountNumber(),
+                    atmService.getAccountHolderName(),
+                    atmService.checkBalance(),
+                    transactions,
+                    outputPath
+                );
+                break;
+            case 3:
+                success = StatementExporter.exportToHTML(
+                    atmService.getMaskedAccountNumber(),
+                    atmService.getAccountHolderName(),
+                    atmService.checkBalance(),
+                    transactions,
+                    outputPath
+                );
+                break;
+            default:
+                System.out.println("\n  [X] Invalid format choice!");
+        }
+        
+        if (success) {
+            System.out.println("  Statement has been exported successfully!");
+        }
+        System.out.println("===============================================");
+        System.out.println();
+    }
+
+    /**
+     * 
+
+    /**
      * Displays exit message and terminates ATM session
      */
     private static void exitATM() {
         System.out.println("===============================================");
         System.out.println("                                               ");
-        System.out.println("    Thank you for using State Bank ATM!       ");
-        System.out.println("    Please collect your card.                  ");
-        System.out.println("    Have a great day!                          ");
+        System.out.println(LanguageManager.getThankYou());
+        System.out.println(LanguageManager.getCollectCard());
+        System.out.println(LanguageManager.getHaveNiceDay());
         System.out.println("                                               ");
         System.out.println("===============================================");
     }
