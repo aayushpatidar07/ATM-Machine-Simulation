@@ -69,6 +69,27 @@ public class Account {
     }
 
     /**
+     * Changes the account PIN
+     * @param oldPin Current PIN
+     * @param newPin New PIN to set
+     * @return true if PIN changed successfully, false if old PIN is incorrect or new PIN is invalid
+     */
+    public boolean changePin(String oldPin, String newPin) {
+        if (!validatePin(oldPin)) {
+            return false; // Old PIN incorrect
+        }
+        if (newPin == null || newPin.length() != 4 || !newPin.matches("\\d{4}")) {
+            return false; // New PIN must be 4 digits
+        }
+        if (newPin.equals(oldPin)) {
+            return false; // New PIN cannot be same as old PIN
+        }
+        this.pin = newPin;
+        addTransaction("PIN CHANGE", 0.0, this.balance);
+        return true;
+    }
+
+    /**
      * Validates the entered PIN
      * @param inputPin PIN entered by user
      * @return true if PIN matches, false otherwise
